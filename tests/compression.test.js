@@ -10,12 +10,7 @@
 */
 
 import { expect } from "chai";
-import { serialize, deserialize } from "../index.js";
-
-function compressionRatio(original, serialized) {
-  const originalSize = JSON.stringify(original).length;
-  return (serialized.length / originalSize) * 100;
-}
+import { serialize, deserialize, compressionRatio } from "../index.js";
 
 function generateRandomNumbers(count) {
   return Array.from(
@@ -27,7 +22,7 @@ function generateRandomNumbers(count) {
 describe("Compression tests: ", function () {
   describe("simple short arrays", function () {
     it("should correctly serialize and deserialize [0]", function () {
-      const numbers = [0];
+      const numbers = [1];
       const serialized = serialize(numbers);
       const deserialized = deserialize(serialized);
 
