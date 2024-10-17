@@ -73,7 +73,7 @@ function inputValidation (numbers) {
       }
     })
   ) {
-    throw new Error("You have to input from 1 to 1000 digits");
+    throw new Error("You have to input only digits from 1 to 1000 and comma separators");
   }
 
   return true;
@@ -101,8 +101,8 @@ async function main() {
     );
     const numbers = numbersInput
       .split(",")
-      .map((num) => parseInt(num.trim(), 10))
-      .filter((num) => num >= 1 && num <= 300);
+      .map((num) => parseInt(num.trim(), 10));
+
     console.log("You entered:", numbers);
 
     const serialized = serialize(numbers);
