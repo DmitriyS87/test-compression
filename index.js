@@ -107,7 +107,7 @@ async function main() {
 
     const serialized = serialize(numbers);
     console.log("Serialized output:", serialized);
-    console.log("Result compression:", compressionRatio(numbers, serialized));
+    console.log("Result compression:", compressionRatio(numbers, serialized), '%');
     rl.close();
   } catch (error) {
     console.error("Error:", error);
