@@ -1,8 +1,17 @@
-# Compression Serialization Test Project
+# Compression Serialization Test
 
 This project implements a compression serialization algorithm for an array of integers within the range of 1 to 300. 
 
-## Original task
+## Original task description
+
+There is a set (an array where order is not important) of integers in the range from 1 to 300.
+The number of integers is up to 1000. Write a serialization/deserialization function to a string so that the resulting string is compact.
+The goal of the task is to maximize data compression compared to simple serialization without using a compression algorithm (at least 50% on average).
+The serialized string must contain only ASCII characters. Any programming language can be used.
+Along with the solution, provide a set of tests - the original string, the compressed string, and the compression ratio.
+Test examples: simple short cases, random sets - 50 numbers, 100 numbers, 500 numbers, 1000 numbers, boundary cases - all single-digit numbers, all two-digit numbers, all three-digit numbers, three occurrences of each number - a total of 900 numbers.
+
+### russian translation
 
 Есть множество (массив, где порядок не важен) целых чисел в диапазоне от 1 до 300. 
 Количество чисел - до 1000. Напишите функцию сериализации / десериализации в строку, чтобы итоговая строка была компактной.

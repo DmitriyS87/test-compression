@@ -1,7 +1,6 @@
 import { Buffer } from "node:buffer";
 import readline from "node:readline";
-import { fileURLToPath } from 'url';
-
+import { fileURLToPath } from "url";
 
 export const serialize = (numbers) => {
   inputValidation(numbers);
@@ -57,28 +56,30 @@ export function compressionRatio(original, serialized) {
   return Number(((serialized.length / originalSize) * 100).toFixed(2));
 }
 
-function inputValidation (numbers) {
+function inputValidation(numbers) {
+  if (!Array.isArray(numbers)) {
+    throw new Error("Input must be an array");
+  }
+
   if (numbers.length === 0 || numbers.length > 1000) {
     throw new Error("You have to input from 1 to 1000 digits!");
   }
 
-  if (
-    numbers.some((number) => {
-      const value = Number(number);
-      if (Number.isNaN(value)) {
-        throw new Error("You have to enter integer digits only!");
-      }
-      if (value <= 0 || value > 300) {
-        throw new Error("Allowed digits are from 1 to 300!");
-      }
-    })
-  ) {
-    throw new Error("You have to input only digits from 1 to 1000 and comma separators");
-  }
+  numbers.forEach((number) => {
+    const value = Number(number);
+    if (Number.isNaN(value)) {
+      throw new Error("All values must be numbers!");
+    }
+    if (!Number.isInteger(value)) {
+      throw new Error("All values must be integers!");
+    }
+    if (value <= 0 || value > 300) {
+      throw new Error(`Allowed digits are from 1 to 300! But found ${value}`);
+    }
+  });
 
   return true;
-};
-
+}
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -93,7 +94,6 @@ function askQuestion(question) {
   });
 }
 
-
 async function main() {
   try {
     const numbersInput = await askQuestion(
@@ -107,7 +107,11 @@ async function main() {
 
     const serialized = serialize(numbers);
     console.log("Serialized output:", serialized);
-    console.log("Result compression:", compressionRatio(numbers, serialized), '%');
+    console.log(
+      "Result compression:",
+      compressionRatio(numbers, serialized),
+      "%"
+    );
     rl.close();
   } catch (error) {
     console.error("Error:", error);
